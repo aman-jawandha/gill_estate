@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-image: url('{{ asset('assets/img/bg-img/hero5.jpg') }}'); background-size: cover; background-position: center;">
     <div class="container-fluid" style="margin-top:70px">
         <div class="row">
             <div class="col-md-4"></div>

@@ -19,8 +19,7 @@
                     <div class="content-sidebar">
                         <!-- Address -->
                         <div class="address mt-30">
-                            <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +45 677 8993000
-                                223</h6>
+                            <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +1 (613) 663-9410</h6>
                             <h6><img src="{{ asset('assets/img/icons/envelope.png') }}" alt=""> office@template.com
                             </h6>
                             <h6><img src="{{ asset('assets/img/icons/location.png') }}" alt=""> Main Str. no 45-46,

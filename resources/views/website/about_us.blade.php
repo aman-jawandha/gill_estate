@@ -21,7 +21,7 @@
                 rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra arcu varius ac. Etiam cursus turpis lectus,
                 id iaculis risus tempor id. Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula.</p>
             <div class="address wow fadeInUp" data-wow-delay="750ms">
-                <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +45 677 8993000 223</h6>
+                <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +1 (613) 663-9410</h6>
                 <h6><img src="{{ asset('assets/img/icons/envelope.png') }}" alt=""> office@template.com</h6>
             </div>
             <div class="signature mt-50 wow fadeInUp" data-wow-delay="1000ms">
