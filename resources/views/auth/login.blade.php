@@ -12,11 +12,11 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-image: url('{{ asset('assets/img/bg-img/hero5.jpg') }}'); background-size: cover; background-position: center;">
     <div class="container-fluid" style="margin-top:70px">
         <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-4 card" style="border: 2px solid #a98162;border-radius:10px">
+            <div class="col-md-4 card">
                 <div class="text-center pt-5 pb-4">
                     <a href="{{ route('home') }}"><img src="assets/img/core-img/logo.png" style="width: 150px;"
                             alt="logo"></a>

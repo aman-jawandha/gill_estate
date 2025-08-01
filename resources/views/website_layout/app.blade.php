@@ -34,7 +34,7 @@
 .floating-query-btn {
     position: fixed;
     bottom: 100px;
-    right: 40px;
+    right: 20px;
     background-color: #947054;
     color: white;
     border-radius: 10px;
@@ -44,7 +44,41 @@
     z-index: 9999;
     border: none;
 }
-    </style>
+
+  .whatsapp-float {
+    position: fixed;
+    right: 23px;
+    bottom: 125px;
+    transform: translateY(-50%);
+    z-index: 1000;
+    background-color: #25D366;
+    color: white;
+    padding: 12px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: sans-serif;
+    animation: popBounce 1.9s ease-in-out infinite;
+  }
+
+  .whatsapp-float img {
+    width: 24px;
+    height: 24px;
+  }
+
+  @keyframes popBounce {
+    0%, 100% {
+      transform: translateY(-50%) scale(1);
+    }
+    50% {
+      transform: translateY(-50%) scale(1.3);
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -233,8 +267,7 @@
                             </div>
                             <!-- Address -->
                             <div class="address">
-                                <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +45 677
-                                    8993000 223</h6>
+                                <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +1 (613) 663-9410</h6>
                                 <h6><img src="{{ asset('assets/img/icons/envelope.png') }}" alt="">
                                     office@template.com</h6>
                                 <h6><img src="{{ asset('assets/img/icons/location.png') }}" alt=""> Main Str.
@@ -252,13 +285,11 @@
                             </div>
                             <!-- Nav -->
                             <ul class="useful-links-nav">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Properties</a></li>
-                                <li><a href="#">Testimonials</a></li>
+                                <li><a href="{{route('home')}}">Home</a></li>
+                                <li><a href="{{route('about-us')}}">About us</a></li>
+                                <li><a href="{{route('properties')}}">Properties</a></li>
                                 <li><a href="#">Blogs</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="{{route('contact-us')}}">Contact</a></li>
                                 
                             </ul>
                         </div>
@@ -277,6 +308,11 @@
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </div>
     </footer>
+    <a href="https://wa.me/+16136639410?text=Hi%20there!" 
+   target="_blank" 
+   class="whatsapp-float">
+   <img src="https://img.icons8.com/color/24/whatsapp.png" alt="WhatsApp">
+</a>
     <button type="button" class="floating-query-btn" style="cursor: pointer;" onclick="$('#query_modal').modal('show')"><i class="fa fa-question-circle"> Have Any Query?</i></button>
     <!-- ##### Footer Area End ##### -->
 
