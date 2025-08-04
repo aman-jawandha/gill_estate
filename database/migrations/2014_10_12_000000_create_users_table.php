@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('zip_code')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->tinyText('terms')->default('Yes');
+            $table->string('terms')->default('Yes');
             $table->string('password');
             $table->string('role');
             $table->string('profile_pic',255)->nullable();
