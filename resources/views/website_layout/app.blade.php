@@ -414,73 +414,61 @@
             $(e.target).prev('.card-header').find('.toggle-icon').text('+');
         });
 
-$('#country').on('change', function () {
-    let country_id = $('#country option:selected').data('id');
-
-    // Reset state dropdown
-    $('#state').empty().append('<option>Loading...</option>');
-    $('#state').niceSelect('update'); // Refresh UI
-
-    if (country_id) {
-        $.ajax({
-            url: "{{route('get-states')}}",
-            method: 'GET',
-            data:{
-                country_id:country_id,
-            },
-            success: function (response) {
-                $('#state').empty().append('<option value="" selected disabled>Select State</option>');
-
-                $.each(response.data, function (i, state) {
-                    $('#state').append(`<option value="${state.name}" data-id="${state.id}">${state.name}</option>`);
+$('#country').on('change', function() {
+            let country_id = $('#country option:selected').data('id');
+            $('#state').empty().append('<option>Loading...</option>');
+            if (country_id) {
+                $.ajax({
+                    url: "{{route('get-states')}}",
+                    method: 'GET',
+                    data:{
+                        country_id:country_id,
+                    },
+                    success: function(response) {
+                        $('#state').empty().append(
+                            '<option value="" selected disabled>Select State</option>');
+                        $.each(response.data, function(i, state) {
+                            $('#state').append(
+                                `<option value="${state.name}" data-id="${state.id}">${state.name}</option>`);
+                        });
+                    },
+                    error: function() {
+                        $('#state').empty().append(
+                            '<option value="" selected disabled>Error in loading states</option>');
+                    }
                 });
-
-                $('#state').niceSelect('update'); // Refresh again after adding states
-            },
-            error: function () {
-                $('#state').empty().append('<option value="" selected disabled>Error in loading states</option>');
-                $('#state').niceSelect('update'); // Refresh on error too
+            } else {
+                $('#state').html('<option value="" selected disabled>Select State</option>');
             }
         });
-    } else {
-        $('#state').html('<option value="" selected disabled>Select State</option>');
-        $('#state').niceSelect('update'); // Refresh if regionCode is missing
-    }
-});
 
-$('#state').on('change', function () {
-    let state_id = $('#state option:selected').data('id');
-
-    // Reset city dropdown
-    $('#city').empty().append('<option>Loading...</option>');
-    $('#city').niceSelect('update'); // Refresh UI
-
-    if (state_id) {
-        $.ajax({
-            url: "{{route('get-cities')}}",
-            method: 'GET',
-            data:{
-                state_id:state_id,
-            },
-            success: function (response) {
-                $('#city').empty().append('<option value="" selected disabled>Select City</option>');
-
-                $.each(response.data, function (i, city) {
-                    $('#city').append(`<option value="${city.name}" data-id="${city.id}">${city.name}</option>`);
+        $('#state').on('change', function() {
+            let state_id = $('#state option:selected').data('id');
+            $('#city').empty().append('<option>Loading...</option>');
+            if (state_id) {
+                $.ajax({
+                    url: "{{route('get-cities')}}",
+                    method: 'GET',
+                    data:{
+                        state_id:state_id,
+                    },
+                    success: function(response) {
+                        $('#city').empty().append(
+                            '<option value="" selected disabled>Select City</option>');
+                        $.each(response.data, function(i, city) {
+                            $('#city').append(
+                                `<option value="${city.name}">${city.name}</option>`);
+                        });
+                    },
+                    error: function() {
+                        $('#city').empty().append(
+                            '<option value="" selected disabled>Error in loading cities</option>');
+                    }
                 });
-
-                $('#city').niceSelect('update'); // Refresh again after adding cities
-            },
-            error: function () {
-                $('#city').empty().append('<option value="" selected disabled>Error in loading cities</option>');
-                $('#city').niceSelect('update'); // Refresh on error too
+            } else {
+                $('#city').html('<option value="" selected disabled>Select City</option>');
             }
         });
-    } else {
-        $('#city').html('<option value="" selected disabled>Select City</option>');
-        $('#city').niceSelect('update'); // Refresh if regionCode is missing
-    }
-});
 
     </script>
 </body>
