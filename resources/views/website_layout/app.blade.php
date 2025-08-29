@@ -24,61 +24,66 @@
         .dd-trigger {
             display: none;
         }
-    .modal-backdrop {
-        z-index: 10001 !important;
-    }
 
-    .modal {
-        z-index: 10002 !important;
-    }
-.floating-query-btn {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    background-color: #947054;
-    color: white;
-    border-radius: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
-    font-weight: bold;
-    z-index: 9999;
-    border: none;
-}
+        .modal-backdrop {
+            z-index: 10001 !important;
+        }
 
-  .whatsapp-float {
-    position: fixed;
-    right: 23px;
-    bottom: 125px;
-    transform: translateY(-50%);
-    z-index: 1000;
-    background-color: #25D366;
-    color: white;
-    padding: 12px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: sans-serif;
-    animation: popBounce 1.9s ease-in-out infinite;
-  }
+        .modal {
+            z-index: 10002 !important;
+        }
 
-  .whatsapp-float img {
-    width: 24px;
-    height: 24px;
-  }
+        .floating-query-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background-color: #947054;
+            color: white;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 9999;
+            border: none;
+        }
 
-  @keyframes popBounce {
-    0%, 100% {
-      transform: translateY(-50%) scale(1);
-    }
-    50% {
-      transform: translateY(-50%) scale(1.3);
-    }
-  }
-</style>
+        .whatsapp-float {
+            position: fixed;
+            right: 23px;
+            bottom: 125px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background-color: #25D366;
+            color: white;
+            padding: 12px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: sans-serif;
+            animation: popBounce 1.9s ease-in-out infinite;
+        }
+
+        .whatsapp-float img {
+            width: 24px;
+            height: 24px;
+        }
+
+        @keyframes popBounce {
+
+            0%,
+            100% {
+                transform: translateY(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateY(-50%) scale(1.3);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -133,10 +138,17 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{ route('home') }}" class="web-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-                                <li><a href="{{ route('about-us') }}" class="web-link {{ request()->routeIs('about-us') ? 'active' : '' }}">About Us</a></li>
-                                <li><a href="{{ route('properties') }}" class="web-link {{ request()->routeIs('properties') ? 'active' : '' }}">Properties</a></li>
-                                <li><a href="{{ route('contact-us') }}" class="web-link {{ request()->routeIs('contact-us') ? 'active' : '' }}">Contact</a></li>
+                                <li><a href="{{ route('home') }}"
+                                        class="web-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+                                <li><a href="{{ route('about-us') }}"
+                                        class="web-link {{ request()->routeIs('about-us') ? 'active' : '' }}">About
+                                        Us</a></li>
+                                <li><a href="{{ route('properties') }}"
+                                        class="web-link {{ request()->routeIs('properties') ? 'active' : '' }}">Properties</a>
+                                </li>
+                                <li><a href="{{ route('contact-us') }}"
+                                        class="web-link {{ request()->routeIs('contact-us') ? 'active' : '' }}">Contact</a>
+                                </li>
                                 @if (auth()->user())
                                     <li><a href="{{ route('profile') }}" class="btn btn-sm"
                                             style="background-color: #947054"><i class="fa fa-user"></i>&nbsp; Profile
@@ -144,13 +156,17 @@
                                         <ul class="dropdown">
                                             {{-- <li><a href="{{ route('profile') }}"><i class="fa fa-user"></i>&nbsp;
                                                     Profile</a></li> --}}
-                                            @if(auth()->user()->role == 'buyer')
-                                                <li><a href="{{ route('find-property') }}"><i class="fa fa-search"></i>&nbsp; Find a Property</a></li>
-                                                <li><a href="{{ route('shortlisted-properties') }}"><i class="fa fa-heart"></i>&nbsp; Shortlisted</a></li>
+                                            @if (auth()->user()->role == 'buyer')
+                                                <li><a href="{{ route('find-property') }}"><i
+                                                            class="fa fa-search"></i>&nbsp; Find a Property</a></li>
+                                                <li><a href="{{ route('shortlisted-properties') }}"><i
+                                                            class="fa fa-heart"></i>&nbsp; Shortlisted</a></li>
                                             @endif
-                                            @if(auth()->user()->role == 'seller')
-                                                <li><a href="{{ route('sell-property') }}"><i class="fa fa-tag"></i>&nbsp;  Sell Property</a></li>
-                                                <li><a href="{{ route('my-properties') }}"><i class="fa fa-home"></i>&nbsp;  My Properties</a></li>
+                                            @if (auth()->user()->role == 'seller')
+                                                <li><a href="{{ route('sell-property') }}"><i
+                                                            class="fa fa-tag"></i>&nbsp; Sell Property</a></li>
+                                                <li><a href="{{ route('my-properties') }}"><i
+                                                            class="fa fa-home"></i>&nbsp; My Properties</a></li>
                                             @endif
                                             <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i>&nbsp;
                                                     Logout</a></li>
@@ -176,15 +192,15 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-<form id="delete-form" method="POST" style="display: none;">
-    @csrf
-    @method('DELETE')
-</form>
-<form id="update-status" method="POST" style="display: none;">
-    @csrf
-</form>
+    <form id="delete-form" method="POST" style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
+    <form id="update-status" method="POST" style="display: none;">
+        @csrf
+    </form>
     @yield('content')
-<div class="modal fade" id="query_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="query_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -219,7 +235,7 @@
                     <div class="text-right p-3">
                         <button type="submit" class="btn btn-primary mb-2">Send</button>
                     </div>
-                    </form>
+                </form>
             </div>
         </div>
     </div>
@@ -260,14 +276,17 @@
                                     <li class="d-flex align-items-center justify-content-between"><span>Monday -
                                             Friday</span> <span>09 AM - 19 PM</span></li>
                                     <li class="d-flex align-items-center justify-content-between"><span>Saturday</span>
-                                        <span>09 AM - 14 PM</span></li>
+                                        <span>09 AM - 14 PM</span>
+                                    </li>
                                     <li class="d-flex align-items-center justify-content-between"><span>Sunday</span>
-                                        <span>Closed</span></li>
+                                        <span>Closed</span>
+                                    </li>
                                 </ul>
                             </div>
                             <!-- Address -->
                             <div class="address">
-                                <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +1 (613) 663-9410</h6>
+                                <h6><img src="{{ asset('assets/img/icons/phone-call.png') }}" alt=""> +1
+                                    (613) 663-9410</h6>
                                 <h6><img src="{{ asset('assets/img/icons/envelope.png') }}" alt="">
                                     office@template.com</h6>
                                 <h6><img src="{{ asset('assets/img/icons/location.png') }}" alt=""> Main Str.
@@ -285,12 +304,12 @@
                             </div>
                             <!-- Nav -->
                             <ul class="useful-links-nav">
-                                <li><a href="{{route('home')}}">Home</a></li>
-                                <li><a href="{{route('about-us')}}">About us</a></li>
-                                <li><a href="{{route('properties')}}">Properties</a></li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
+                                <li><a href="{{ route('about-us') }}">About us</a></li>
+                                <li><a href="{{ route('properties') }}">Properties</a></li>
                                 <li><a href="#">Blogs</a></li>
-                                <li><a href="{{route('contact-us')}}">Contact</a></li>
-                                
+                                <li><a href="{{ route('contact-us') }}">Contact</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -308,12 +327,11 @@
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </div>
     </footer>
-    <a href="https://wa.me/+16136639410?text=Hi%20there!" 
-   target="_blank" 
-   class="whatsapp-float">
-   <img src="https://img.icons8.com/color/24/whatsapp.png" alt="WhatsApp">
-</a>
-    <button type="button" class="floating-query-btn" style="cursor: pointer;" onclick="$('#query_modal').modal('show')"><i class="fa fa-question-circle"> Have Any Query?</i></button>
+    <a href="https://wa.me/+16136639410?text=Hi%20there!" target="_blank" class="whatsapp-float">
+        <img src="https://img.icons8.com/color/24/whatsapp.png" alt="WhatsApp">
+    </a>
+    <button type="button" class="floating-query-btn" style="cursor: pointer;"
+        onclick="$('#query_modal').modal('show')"><i class="fa fa-question-circle"> Have Any Query?</i></button>
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -414,74 +432,62 @@
             $(e.target).prev('.card-header').find('.toggle-icon').text('+');
         });
 
-$('#country').on('change', function () {
-    let country_id = $('#country option:selected').data('id');
-
-    // Reset state dropdown
-    $('#state').empty().append('<option>Loading...</option>');
-    $('#state').niceSelect('update'); // Refresh UI
-
-    if (country_id) {
-        $.ajax({
-            url: "{{route('get-states')}}",
-            method: 'GET',
-            data:{
-                country_id:country_id,
-            },
-            success: function (response) {
-                $('#state').empty().append('<option value="" selected disabled>Select State</option>');
-
-                $.each(response.data, function (i, state) {
-                    $('#state').append(`<option value="${state.name}" data-id="${state.id}">${state.name}</option>`);
+        $('#country').on('change', function() {
+            let country_id = $('#country option:selected').data('id');
+            $('#state').empty().append('<option>Loading...</option>');
+            if (country_id) {
+                $.ajax({
+                    url: "{{ route('get-states') }}",
+                    method: 'GET',
+                    data: {
+                        country_id: country_id,
+                    },
+                    success: function(response) {
+                        $('#state').empty().append(
+                            '<option value="" selected disabled>Select State</option>');
+                        $.each(response.data, function(i, state) {
+                            $('#state').append(
+                                `<option value="${state.name}" data-id="${state.id}">${state.name}</option>`
+                                );
+                        });
+                    },
+                    error: function() {
+                        $('#state').empty().append(
+                            '<option value="" selected disabled>Error in loading states</option>');
+                    }
                 });
-
-                $('#state').niceSelect('update'); // Refresh again after adding states
-            },
-            error: function () {
-                $('#state').empty().append('<option value="" selected disabled>Error in loading states</option>');
-                $('#state').niceSelect('update'); // Refresh on error too
+            } else {
+                $('#state').html('<option value="" selected disabled>Select State</option>');
             }
         });
-    } else {
-        $('#state').html('<option value="" selected disabled>Select State</option>');
-        $('#state').niceSelect('update'); // Refresh if regionCode is missing
-    }
-});
 
-$('#state').on('change', function () {
-    let state_id = $('#state option:selected').data('id');
-
-    // Reset city dropdown
-    $('#city').empty().append('<option>Loading...</option>');
-    $('#city').niceSelect('update'); // Refresh UI
-
-    if (state_id) {
-        $.ajax({
-            url: "{{route('get-cities')}}",
-            method: 'GET',
-            data:{
-                state_id:state_id,
-            },
-            success: function (response) {
-                $('#city').empty().append('<option value="" selected disabled>Select City</option>');
-
-                $.each(response.data, function (i, city) {
-                    $('#city').append(`<option value="${city.name}" data-id="${city.id}">${city.name}</option>`);
+        $('#state').on('change', function() {
+            let state_id = $('#state option:selected').data('id');
+            $('#city').empty().append('<option>Loading...</option>');
+            if (state_id) {
+                $.ajax({
+                    url: "{{ route('get-cities') }}",
+                    method: 'GET',
+                    data: {
+                        state_id: state_id,
+                    },
+                    success: function(response) {
+                        $('#city').empty().append(
+                            '<option value="" selected disabled>Select City</option>');
+                        $.each(response.data, function(i, city) {
+                            $('#city').append(
+                                `<option value="${city.name}">${city.name}</option>`);
+                        });
+                    },
+                    error: function() {
+                        $('#city').empty().append(
+                            '<option value="" selected disabled>Error in loading cities</option>');
+                    }
                 });
-
-                $('#city').niceSelect('update'); // Refresh again after adding cities
-            },
-            error: function () {
-                $('#city').empty().append('<option value="" selected disabled>Error in loading cities</option>');
-                $('#city').niceSelect('update'); // Refresh on error too
+            } else {
+                $('#city').html('<option value="" selected disabled>Select City</option>');
             }
         });
-    } else {
-        $('#city').html('<option value="" selected disabled>Select City</option>');
-        $('#city').niceSelect('update'); // Refresh if regionCode is missing
-    }
-});
-
     </script>
 </body>
 
