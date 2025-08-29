@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             PropertyTypesSeeder::class,
             PropertyStatusSeeder::class,
-            StatesSeeder::class,
+            WorldSeeder::class,
         ]);
     }
 }

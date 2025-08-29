@@ -34,22 +34,35 @@
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Country</label>
-                    <input type="text" class="form-control" name="country" id="country" required value="Canada"
-                        readonly>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">State</label>
-                    <select class="form-control" name="state" id="state" required>
-                        <option value="" selected disabled>Select State</option>
-                        @foreach ($states as $state)
-                            <option value="{{ $state->name }}" data-code="{{ $state->code }}">{{ $state->name }}</option>
+                    <select class="form-control" name="country" id="country" required>
+                        <option value="" selected>Select Country</option>
+                        @foreach ($countries as $country)
+                            <option value="{{ $country->name }}" data-id="{{ $country->id }}"
+                                {{ request('country') == $country->name ? 'selected' : '' }}>
+                                {{ $country->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">City Or Neighborhoods</label>
-                    <select id="city" name="city" required class="form-control">
-                        <option value="" selected disabled>Select City</option>
+                    <label class="form-label">State</label>
+                    <select id="state" name="state" class="form-control" required>
+                        @if (request('state'))
+                            <option value="">Select State</option>
+                            <option value="{{ request('state') }}" selected>{{ request('state') }}</option>
+                        @else
+                            <option value="" selected>Select State</option>
+                        @endif
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">City</label>
+                    <select id="city" name="city" class="form-control" required>
+                        @if (request('city'))
+                            <option value="">Select City</option>
+                            <option value="{{ request('city') }}" selected>{{ request('city') }}</option>
+                        @else
+                            <option value="" selected>Select City</option>
+                        @endif
                     </select>
                 </div>
                 <div class="col-md-3">

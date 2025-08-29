@@ -32,7 +32,8 @@ Route::controller(WebsiteController::class)->group(function () {
     Route::get('/property-detail/{id}','property_detail')->name('property-detail');
     Route::get('/contact-us','contact_us')->name('contact-us');
     Route::post('/store-contact-us','store_contact_us')->name('store-contact-us');
-    Route::get('/api/cities/{regionCode}','get_cities')->name('get-cities');
+    Route::get('/get-states','get_states')->name('get-states');
+    Route::get('/get-cities','get_cities')->name('get-cities');
 });
 
 // --------------------common routes-------------------

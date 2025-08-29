@@ -10,10 +10,10 @@ use App\Models\Gallery;
 class PropertyController extends Controller
 {
     public function index(){
-        $states = DB::table('states')->get();
+        $countries = DB::table('countries')->get();
         $types = DB::table('property_types')->get();
         $properties = Property::where('user_role','!=','seller')->orderBy('id','DESC')->paginate(6);
-        return view('admin.properties.index',compact('states','types','properties'));
+        return view('admin.properties.index',compact('countries','types','properties'));
     }
 
     public function search(Request $request)
@@ -26,6 +26,10 @@ class PropertyController extends Controller
     $query->whereNotIn('status', ['Pending', 'Inactive', 'Rejected']);
 
     // Filters
+    if ($request->filled('country')) {
+        $query->where('country', $request->country);
+    }
+
     if ($request->filled('state')) {
         $query->where('state', $request->state);
     }
@@ -73,17 +77,17 @@ class PropertyController extends Controller
     $properties = $query->paginate(6)->appends($request->all());
 
     // Optional: Get dropdown data for filters in admin view
-    $states = DB::table('states')->get();
+    $countries = DB::table('countries')->get();
     $types = DB::table('property_types')->get();
-    return view('admin.properties.index', compact('properties', 'states', 'types'));
+    return view('admin.properties.index', compact('countries', 'properties', 'types'));
 }
 
 
     public function create(){
-        $states = DB::table('states')->get();
+        $countries = DB::table('countries')->get();
         $types = DB::table('property_types')->get();
         $statuses = DB::table('property_status')->get();
-        return view('admin.properties.create',compact('states','types','statuses'));
+        return view('admin.properties.create',compact('countries','types','statuses'));
     }
 
     public function store(Request $req){
@@ -121,11 +125,11 @@ class PropertyController extends Controller
     }
 
     public function edit($id){
-        $states = DB::table('states')->get();
+        $countries = DB::table('countries')->get();
         $types = DB::table('property_types')->get();
         $statuses = DB::table('property_status')->get();
         $property = Property::where('id',$id)->first();
-        return view('admin.properties.edit',compact('states','types','statuses','property'));
+        return view('admin.properties.edit',compact('countries','types','statuses','property'));
     }
 
     public function update(Request $req){

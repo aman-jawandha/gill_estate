@@ -10,9 +10,9 @@ use App\Models\Gallery;
 class SellerController extends Controller
 {
     public function sell_property(){
-        $states = DB::table('states')->get();
+        $countries = DB::table('countries')->get();
         $types = DB::table('property_types')->get();
-        return view('seller.sell_property',compact('states','types'));
+        return view('seller.sell_property',compact('countries','types'));
     }
 
     public function my_properties(){
@@ -21,10 +21,10 @@ class SellerController extends Controller
     }
 
     public function edit_property($id){
-        $states = DB::table('states')->get();
+        $countries = DB::table('countries')->get();
         $types = DB::table('property_types')->get();
         $property = Property::where('id',$id)->first();
-        return view('seller.edit_my_property',compact('states','types','property'));
+        return view('seller.edit_my_property',compact('countries','types','property'));
     }
 
     public function view_property($id){

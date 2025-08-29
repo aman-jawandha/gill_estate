@@ -334,13 +334,44 @@
             });
         }
 
-        $('#state').on('change', function() {
-            let regionCode = $('#state option:selected').data('code');
-            $('#city').empty().append('<option>Loading...</option>');
-            if (regionCode) {
+        $('#country').on('change', function() {
+            let country_id = $('#country option:selected').data('id');
+            $('#state').empty().append('<option>Loading...</option>');
+            if (country_id) {
                 $.ajax({
-                    url: `/api/cities/${regionCode}`,
+                    url: "{{route('get-states')}}",
                     method: 'GET',
+                    data:{
+                        country_id:country_id,
+                    },
+                    success: function(response) {
+                        $('#state').empty().append(
+                            '<option value="" selected disabled>Select State</option>');
+                        $.each(response.data, function(i, state) {
+                            $('#state').append(
+                                `<option value="${state.name}" data-id="${state.id}">${state.name}</option>`);
+                        });
+                    },
+                    error: function() {
+                        $('#state').empty().append(
+                            '<option value="" selected disabled>Error in loading states</option>');
+                    }
+                });
+            } else {
+                $('#state').html('<option value="" selected disabled>Select State</option>');
+            }
+        });
+
+        $('#state').on('change', function() {
+            let state_id = $('#state option:selected').data('id');
+            $('#city').empty().append('<option>Loading...</option>');
+            if (state_id) {
+                $.ajax({
+                    url: "{{route('get-cities')}}",
+                    method: 'GET',
+                    data:{
+                        state_id:state_id,
+                    },
                     success: function(response) {
                         $('#city').empty().append(
                             '<option value="" selected disabled>Select City</option>');

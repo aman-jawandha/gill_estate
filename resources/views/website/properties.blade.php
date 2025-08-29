@@ -17,12 +17,22 @@
                         <form action="{{route('search-properties')}}" method="get">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <select class="form-control" name="state" id="state">
-                                        <option value="" selected>Select State</option>
-                                        @foreach ($states as $state)
-                                            <option value="{{ $state->name }}" data-code="{{ $state->code }}" {{ request('state') == $state->name ? 'selected' : '' }}>
-                                                {{ $state->name }}</option>
+                                    <select class="form-control" name="country" id="country">
+                                        <option value="" selected>Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->name }}" data-id="{{ $country->id }}" {{ request('country') == $country->name ? 'selected' : '' }}>
+                                                {{ $country->name }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                   <select id="state" name="state" class="form-control">
+                                        @if(request('state'))
+                                        <option value="">Select State</option>
+                                        <option value="{{request('state')}}" selected>{{request('state')}}</option>
+                                        @else
+                                        <option value="" selected>Select State</option>
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -62,7 +72,7 @@
                                         <option value="latest" {{ request('order_by') == 'latest' ? 'selected' : '' }}>Latest</option>
                                     </select>
                                 </div>
-                                <div class="col-md-10 text-right">
+                                <div class="col-md-7 text-right">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                                     <a href="{{route('properties')}}" class="btn btn-primary"><i class="fa fa-ban"></i> Reset</a>
                                 </div>
