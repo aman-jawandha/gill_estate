@@ -25,10 +25,10 @@ class WebsiteController extends Controller
     }
 
     public function properties(){
-        $states = DB::table('states')->get();
+        $countries = DB::table('countries')->get();
         $types = DB::table('property_types')->get();
         $properties = Property::orderBy('published_at','DESC')->where('status','!=','Pending')->where('status','!=','Inactive')->where('status','!=','Rejected')->paginate(9);
-        return view('website.properties',compact('properties','states','types'));
+        return view('website.properties',compact('properties','countries','types'));
     }
 
     public function search_properties(Request $request)
@@ -39,6 +39,10 @@ class WebsiteController extends Controller
     $query->whereNotIn('status', ['Pending', 'Inactive', 'Rejected']);
 
     // Filters
+    if ($request->filled('country')) {
+        $query->where('country', $request->country);
+    }
+
     if ($request->filled('state')) {
         $query->where('state', $request->state);
     }
@@ -83,34 +87,20 @@ class WebsiteController extends Controller
     }
 
     $properties = $query->paginate(9)->appends($request->all());
-    $states = DB::table('states')->get();
+    $countries = DB::table('countries')->get();
     $types = DB::table('property_types')->get();
-    return view('website.properties', compact('properties', 'states', 'types'));
+    return view('website.properties', compact('properties', 'countries', 'types'));
 }
 
-    public function get_cities($regionCode)
+    public function get_states(Request $req){
+        $states = DB::table('states')->where('country_id',$req->country_id)->get();
+        return response()->json(['data' => $states]);
+    }
+
+    public function get_cities(Request $req)
     {
-        $allCities = [];
-        $limit = 10;
-        $offset = 0;
-
-        do {
-            $response = Http::withHeaders([
-                'X-RapidAPI-Key' => env('RAPIDAPI_KEY'),
-                'X-RapidAPI-Host' => 'wft-geo-db.p.rapidapi.com',
-            ])->get("https://wft-geo-db.p.rapidapi.com/v1/geo/countries/CA/regions/{$regionCode}/cities", [
-                'limit' => $limit,
-                'offset' => $offset,
-            ]);
-
-            $data = $response->json();
-            $cities = $data['data'] ?? [];
-            $allCities = array_merge($allCities, $cities);
-            $offset += $limit;
-
-        } while (count($cities) === $limit); // loop until no more cities
-
-        return response()->json(['data' => $allCities]);
+        $cities = DB::table('cities')->where('state_id',$req->state_id)->get();
+        return response()->json(['data' => $cities]);
     }
 
     public function property_detail($id){

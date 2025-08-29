@@ -60,19 +60,36 @@
                                 placeholder="Enter Address Street" required value="{{ auth()->user()->street }}">
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">City <span class="red_star">*</span></label>
-                            <input type="text" name="city" id="city" maxlength="50" class="form-control"
-                                placeholder="Enter City" required value="{{ auth()->user()->city }}">
+                            <label class="form-label">Country <span class="red_star">*</span></label>
+                            <select class="form-control" name="country" id="country" required>
+                                        <option value="" selected>Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->name }}" data-id="{{ $country->id }}" {{ auth()->user()->country == $country->name ? 'selected' : '' }}>
+                                                {{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">State <span class="red_star">*</span></label>
-                            <input type="text" name="state" id="state" maxlength="50" class="form-control"
-                                placeholder="Enter State" required value="{{ auth()->user()->state }}">
+                            <select id="state" name="state" class="form-control" required>
+                                        @if(auth()->user()->state)
+                                        <option value="">Select State</option>
+                                        <option value="{{auth()->user()->state}}" selected>{{auth()->user()->state}}</option>
+                                        @else
+                                        <option value="" selected>Select State</option>
+                                        @endif
+                                    </select>
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Country <span class="red_star">*</span></label>
-                            <input type="text" name="country" id="country" maxlength="50" class="form-control"
-                                placeholder="Enter Country" required value="{{ auth()->user()->country }}">
+                            <label class="form-label">City <span class="red_star">*</span></label>
+                            <select id="city" name="city" class="form-control" required>
+                                        @if(auth()->user()->city)
+                                        <option value="">Select City</option>
+                                        <option value="{{auth()->user()->city}}" selected>{{auth()->user()->city}}</option>
+                                        @else
+                                        <option value="" selected>Select City</option>
+                                        @endif
+                                    </select>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Zip Code <span class="red_star">*</span></label>

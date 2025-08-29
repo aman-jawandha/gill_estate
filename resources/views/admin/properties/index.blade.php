@@ -20,12 +20,22 @@
                         <form action="{{route('search-properties-list')}}" method="get">
                             <div class="row p-4">
                                 <div class="col-md-3">
-                                    <select class="form-control" name="state" id="state">
-                                        <option value="" selected>Select State</option>
-                                        @foreach ($states as $state)
-                                            <option value="{{ $state->name }}" data-code="{{ $state->code }}" {{ request('state') == $state->name ? 'selected' : '' }}>
-                                                {{ $state->name }}</option>
+                                    <select class="form-control" name="country" id="country">
+                                        <option value="" selected>Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->name }}" data-id="{{ $country->id }}" {{ request('country') == $country->name ? 'selected' : '' }}>
+                                                {{ $country->name }}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="state" name="state" class="form-control">
+                                        @if(request('state'))
+                                        <option value="">Select State</option>
+                                        <option value="{{request('state')}}" selected>{{request('state')}}</option>
+                                        @else
+                                        <option value="" selected>Select State</option>
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -46,7 +56,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-3">
                                     <select class="form-control" name="max_price" id="max_price">
                                         <option value="" selected>Price Range Below</option>
                                         <option value="200000" {{ request('max_price') == '200000' ? 'selected' : '' }}>$200,000</option>
@@ -65,7 +75,7 @@
                                         <option value="latest" {{ request('order_by') == 'latest' ? 'selected' : '' }}>Latest</option>
                                     </select>
                                 </div>
-                                <div class="col-md-10 text-end mt-3">
+                                <div class="col-md-7 text-end mt-3">
                                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
                                     <a href="{{route('properties-list')}}" class="btn btn-primary btn-sm"><i class="fa fa-ban"></i> Reset</a>
                                 </div>

@@ -29,8 +29,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label">Features</label>
-                                    <textarea class="form-control" style="min-height:150px" rows="7" name="features" id="summernote" required maxlength="5000"
-                                        placeholder="Write About Proerty">{{ $property->features }}</textarea>
+                                    <textarea class="form-control" style="min-height:150px" rows="7" name="features" id="summernote" required
+                                        maxlength="5000" placeholder="Write About Proerty">{{ $property->features }}</textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label">Street</label>
@@ -39,25 +39,36 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Country</label>
-                                    <input type="text" class="form-control" name="country" id="country"
-                                        value="{{ $property->country }}" required value="Canada" readonly>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">State</label>
-                                    <select class="form-control" name="state" id="state" required>
-                                        <option value="" selected disabled>Select State</option>
-                                        @foreach ($states as $state)
-                                            <option value="{{ $state->name }}" data-code="{{ $state->code }}"
-                                                {{ $property->state == $state->name ? 'selected' : '' }}>
-                                                {{ $state->name }}</option>
+                                    <select class="form-control" name="country" id="country" required>
+                                        <option value="" selected>Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->name }}" data-id="{{ $country->id }}"
+                                                {{ $property->country == $country->name ? 'selected' : '' }}>
+                                                {{ $country->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">City Or Neighborhoods</label>
-                                    <select id="city" name="city" required class="form-control">
-                                        <option value="" selected disabled>Select City</option>
-                                        <option value="{{ $property->city }}" selected>{{ $property->city }}</option>
+                                    <label class="form-label">State</label>
+                                    <select id="state" name="state" class="form-control" required>
+                                        @if ($property->state)
+                                            <option value="">Select State</option>
+                                            <option value="{{ $property->state }}" selected>{{ $property->state }}
+                                            </option>
+                                        @else
+                                            <option value="" selected>Select State</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">City</label>
+                                    <select id="city" name="city" class="form-control" required>
+                                        @if ($property->city)
+                                            <option value="">Select City</option>
+                                            <option value="{{ $property->city }}" selected>{{ $property->city }}</option>
+                                        @else
+                                            <option value="" selected>Select City</option>
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -79,7 +90,7 @@
                                 <div class="col-md-3">
                                     <label class="form-label">Property Status</label>
                                     <select class="form-control" name="status" id="status" required>
-                                        <option value="{{$property->status}}" selected>{{$property->status}}</option>
+                                        <option value="{{ $property->status }}" selected>{{ $property->status }}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">

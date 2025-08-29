@@ -33,10 +33,11 @@ class DashboardController extends Controller
 
     public function profile(){
         $user = User::where('id',auth()->user()->id)->first();
+        $countries = DB::table('countries')->get();
         if(Auth::user()->role == 'seller' || Auth::user()->role == 'buyer') {
-            return view('auth.profile',compact('user'));
+            return view('auth.profile',compact('user','countries'));
         }else{
-            return view('admin.profile',compact('user'));
+            return view('admin.profile',compact('user','countries'));
         }
     }
 
