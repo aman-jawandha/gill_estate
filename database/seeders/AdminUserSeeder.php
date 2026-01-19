@@ -33,5 +33,16 @@ class AdminUserSeeder extends Seeder
         $adminRole = Role::where('name', 'admin')->first();
         $adminRole->syncPermissions(Permission::pluck('name')->toArray());
         $admin->assignRole($adminRole);
+
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        foreach ($days as $day) {
+            DB::table('user_availabilities')->insert([
+                'user_id' => 1,
+                'day'     => $day,
+            ]);
+        }
+            DB::table('durations')->insert([
+                'user_id' => 1,
+            ]);
     }
 }

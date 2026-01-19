@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('status')->default('Pending');
             $table->text('reason')->nullable();
             $table->string('built_year')->nullable();
-            $table->integer('bed_rooms')->nullable();
-            $table->integer('bath_rooms')->nullable();
+            $table->string('bed_rooms')->nullable();
+            $table->string('bath_rooms')->nullable();
             $table->float('area', 12, 2)->nullable(); // size in sq ft
             $table->integer('floor_number')->nullable();
             $table->integer('total_floors')->nullable();

@@ -17,6 +17,7 @@ class RolesTableSeeder extends Seeder
             ['name' => 'admin',  'guard_name' => 'web'],
             ['name' => 'seller', 'guard_name' => 'web'],
             ['name' => 'buyer',  'guard_name' => 'web'],
+            ['name' => 'user',  'guard_name' => 'web'],
         ]);
     }
 }

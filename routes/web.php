@@ -10,6 +10,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ Route::controller(WebsiteController::class)->group(function () {
     Route::post('/store-contact-us','store_contact_us')->name('store-contact-us');
     Route::get('/get-states','get_states')->name('get-states');
     Route::get('/get-cities','get_cities')->name('get-cities');
+    Route::post('/set-timezone','set_timezone')->name('set.timezone');
+    Route::get('/get-time-slots','get_time_slots')->name('get-time-slots');
+    Route::post('/store-appointment','store_appointment')->name('store-appointment');
+    Route::get('/stripe/success','stripe_success')->name('stripe.success');
+    Route::get('/stripe/cancel', fn() => back()->with('error','Payment cancelled'))->name('stripe.cancel');
 });
 
 // --------------------common routes-------------------
@@ -68,6 +74,16 @@ Route::middleware(['auth'])->group(function (){
         Route::get('contact-us-messages','contact_us_msgs')->name('contact-us-messages')->middleware('permission:contact-us-list');
         Route::get('queries','queries')->name('queries')->middleware('permission:queries-list');
         Route::delete('delete-feedback/{id}','delete_feedback')->name('delete-feedback');
+        Route::get('settings','settings')->name('settings')->middleware('permission:admin-settings');
+        Route::post('store-settings','store_settings')->name('store-settings')->middleware('permission:admin-settings');
+        Route::get('availability','availability')->name('availability')->middleware('permission:admin-availability');
+        Route::post('store-availability','store_availability')->name('store-availability')->middleware('permission:admin-availability');
+        Route::get('hours-breaks','hours_breaks')->name('hours-breaks')->middleware('permission:admin-hours-breaks');
+        Route::post('store-hours-break','store_hours_break')->name('store-hours-break')->middleware('permission:admin-hours-breaks');
+        Route::delete('delete-hours-break/{id}','delete_hours_break')->name('delete-hours-break')->middleware('permission:admin-hours-breaks');
+        Route::get('days-breaks','days_breaks')->name('days-breaks')->middleware('permission:admin-days-breaks');
+        Route::post('store-days-break','store_days_break')->name('store-days-break')->middleware('permission:admin-days-breaks');
+        Route::delete('delete-days-break/{id}','delete_days_break')->name('delete-days-break')->middleware('permission:admin-days-breaks');
     });
 
     Route::controller(RoleController::class)->group(function () {
@@ -119,6 +135,12 @@ Route::middleware(['auth'])->group(function (){
         Route::get('sellers-properties','sellers_properties')->name('sellers-properties')->middleware('permission:sellers-properties');
         Route::post('reject-property','reject_property')->name('reject-property')->middleware('permission:reject-property');
     });
+
+    Route::controller(BookingController::class)->group(function () {
+        Route::get('my-bookings','my_bookings')->name('my-bookings')->middleware('permission:view-bookings');
+        Route::get('reschedule-appointment/{id}','reschedule_apoointment')->name('reschedule-appointment')->middleware('permission:reschedule-appointment');
+        Route::post('store-reschedule-appointment','store_rescheduled_apoointment')->name('store-reschedule-appointment')->middleware('permission:reschedule-appointment');
+    });
 });
 
 // --------------------seller routes-------------------
@@ -150,5 +172,14 @@ Route::middleware(['auth', 'role:buyer'])->group(function (){
         Route::get('find-property','find_property')->name('find-property');
         Route::post('store-property-requirements','store_property_requirements')->name('store-property-requirements');
         Route::delete('delete-property-requirement/{id}','delete_property_requirement')->name('delete-property-requirement');
+    });
+});
+
+// --------------------seller, buyer and user common routes-------------------
+
+Route::middleware(['auth', 'role:buyer|seller|user'])->group(function (){
+    Route::controller(BookingController::class)->group(function () {
+        Route::get('my-appointments','my_appointments')->name('my-appointments');
+        Route::get('change-role/{role}','change_role')->name('change-role');
     });
 });

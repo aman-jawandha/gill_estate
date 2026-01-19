@@ -48,7 +48,7 @@
                     <p style="margin-bottom:0px">Bedrooms - {{$property->bed_rooms}} | Bathrooms - {{$property->bath_rooms}}</p>
                     <p style="margin-bottom:0px">Area - {{$property->area}} sq ft</p>
                     <p style="margin-bottom:0px">Property Type - {{$property->type}}</p>
-                    <p style="margin-bottom:0px">Published At - {{ ($property->published_at) ? date('d-m-Y | h:i a', strtotime($property->published_at)) : 'N\A' }}</p>
+                    <p style="margin-bottom:0px">Published At - {{ ($property->published_at) ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}</p>
                     <div class="btn-group mt-3">
                         <a href="{{route('view-my-property',$property->id)}}" class="btn btn-success m-1"><i class="fa fa-eye"></i></a>
                         @if($property->status == 'Pending' || $property->status == 'Rejected') 

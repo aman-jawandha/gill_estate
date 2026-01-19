@@ -156,6 +156,10 @@
                                         <ul class="dropdown">
                                             {{-- <li><a href="{{ route('profile') }}"><i class="fa fa-user"></i>&nbsp;
                                                     Profile</a></li> --}}
+                                            @if (auth()->user()->role == 'seller' || auth()->user()->role == 'buyer' || auth()->user()->role == 'user')
+                                                <li><a href="{{ route('my-appointments') }}"><i
+                                                            class="fa fa-list"></i>&nbsp; Appointments</a></li>
+                                            @endif
                                             @if (auth()->user()->role == 'buyer')
                                                 <li><a href="{{ route('find-property') }}"><i
                                                             class="fa fa-search"></i>&nbsp; Find a Property</a></li>
@@ -351,6 +355,21 @@
     <!-- Active js -->
     <script src="{{ asset('assets/js/active.js') }}"></script>
     @yield('js')
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    // store in session via ajax if not logged in
+    fetch("{{ route('set.timezone') }}", {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ timezone: tz }),
+    });
+});
+</script>
     <script>
         $('#summernote').summernote({
             height: 250

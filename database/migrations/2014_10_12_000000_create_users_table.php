@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role');
             $table->string('profile_pic',255)->nullable();
+            $table->string('timezone')->nullable();
             $table->string('type')->nullable();
             $table->string('favourites')->nullable();
             $table->string('status')->default('Active');

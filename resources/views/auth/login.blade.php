@@ -37,6 +37,7 @@
                             placeholder="Email"><br>
                         <input type="password" class="form-control" name="password" value="{{ old('password') }}"
                             placeholder="Password"><br>
+                            <input type="hidden" name="timezone" id="timezone">
                         <button type="submit" class="btn btn-primary" style="width: 100%;background-color:#947054;border:none">Login</button>
                         <div class="d-flex align-items-center justify-content-between mt-4 mb-4">
                             <a class="text-muted" href="{{route('forgot-password')}}">Forgot password?</a>
@@ -49,5 +50,10 @@
         </div>
     </div>
 </body>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("timezone").value = tz;
+    });
+</script>
 </html>

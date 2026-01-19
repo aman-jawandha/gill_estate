@@ -56,9 +56,107 @@
             </div>
         </div>
     </section>
+    @if($durations->available == 'Yes')
+    <section class="south-contact-area section-padding-50 bg-light">
+            <div class="container">
+                <div class="contact-heading text-center">
+                <h6>Make An Appointment</h6>
+            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3"><b>Availability</b></h5>
+                                @foreach ($availabilities as $availability)
+                                    <p><b>{{$availability->day}} : </b>{{($availability->punch_in && $availability->punch_out) ? convertToUserTime($availability->punch_in).' - '.convertToUserTime($availability->punch_out) : 'Not Available'}}</p>
+                                @endforeach
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3"><b>Leaves</b></h5>
+                                @if($days_breaks->count() > 0)
+                                @foreach ($days_breaks as $break)
+                                    <p><b>{{changeDateFormat($break->from_date).' - '.changeDateFormat($break->to_date)}}</b></p>
+                                @endforeach
+                                @else
+                                <p>No Data Found</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{{route('store-appointment')}}" id="appointment_form" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Your Name" required maxlength="50" value="{{old('name')}}">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Your Email" required maxlength="50" value="{{old('email')}}">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="phone" id="phone"
+                                        placeholder="Your Phone" required value="{{old('phone')}}" minlength="10" maxlength="10">
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="type" id="type" required>
+                                        <option value="" selected disabled>Select Type</option>
+                                        @if($durations->face_to_face == 'Yes')
+                                        <option value="Face To Face" {{(old('type') == 'Face To Face') ? 'selected' : ''}}>Face To Face</option>
+                                        @endif
+                                        @if($durations->online_booking == 'Yes')
+                                        <option value="Online" {{(old('type') == 'Online') ? 'selected' : ''}}>Online</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="duration" id="duration" required>
+                                        <option value="" selected disabled>Select Duration</option>
+                                        @if($durations->fifteen_minutes == 'Yes')
+                                        <option value="15 minutes" {{(old('duration') == '15 minutes') ? 'selected' : ''}}>15 minutes - CAD {{ number_format($durations->{'15 minutes'}, 2) }}</option>
+                                        @endif
+                                        @if($durations->thiry_minutes == 'Yes')
+                                        <option value="30 minutes" {{(old('duration') == '30 minutes') ? 'selected' : ''}}>30 minutes - CAD {{ number_format($durations->{'30 minutes'}, 2) }}</option>
+                                        @endif
+                                        @if($durations->fortyfive_minutes == 'Yes')
+                                        <option value="45 minutes" {{(old('duration') == '45 minutes') ? 'selected' : ''}}>45 minutes - CAD {{ number_format($durations->{'45 minutes'}, 2) }}</option>
+                                        @endif
+                                        @if($durations->sixty_minutes == 'Yes')
+                                        <option value="60 minutes" {{(old('duration') == '60 minutes') ? 'selected' : ''}}>60 minutes - CAD {{ number_format($durations->{'60 minutes'}, 2) }}</option>
+                                        @endif
+                                    </select>   
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" name="booking_date" class="form-control" min="{{date('Y-m-d')}}"
+                                        id="booking_date" required value="{{old('booking_date')}}">
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="booking_time" id="booking_time" required>
+                                        <option value="" selected disabled>Select Time</option>
+                                        @if(old('booking_time'))
+                                        <option value="{{old('booking_time')}}" selected>{{old('booking_time')}}</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            <div class="col-md-12">
+                                <span class="text-danger" id="error_msg"></span>
+                                <textarea class="form-control" name="message" style="height:200px" placeholder="Write Something" required maxlength="1000">{{old('message')}}</textarea>
+                                <span class="text-success" id="success_msg"></span>
+                            </div>
+                            </div>
+                                <div class="text-center mt-2">
+                                    <button type="submit" class="btn south-btn">Book Now</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section><br>
+        @endif
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="bg-light mt-4 mb-4 p-3">
                     <h4>Our Location</h4>
                     <hr>
@@ -69,12 +167,63 @@
                     </iframe>
                 </div>
             </div>
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="bg-light mt-4 mb-4 p-3">
                     <iframe src="https://calendly.com/amandeep00988/30min" width="100%" height="550"
                         frameborder="0"></iframe>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
+@endsection
+@section('js')
+<script>
+    $(document).on("change","#booking_date",function() {
+        var booking_date = $(this).val();
+        $.ajax({
+            url: "{{route('get-time-slots')}}",
+            type: 'GET',
+            data: { 
+                booking_date : booking_date,
+             },
+            success: function (data) {
+                $('#success_msg').text('');
+                $('#error_msg').text('');
+                if(data.status == 'error'){
+                    $('#error_msg').text(data.msg);
+                }
+                var $timeDropdown = $('#booking_time');
+                $timeDropdown.empty();
+                $timeDropdown.append('<option value="" selected disabled>Select time</option>');
+                $.each(data.slots, function (index, time) {
+                    $timeDropdown.append('<option value="' + time + '">' + time + '</option>');
+                });
+            }
+        });
+    });
+
+$("#appointment_form").validate({
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+        error.addClass("text-danger");
+        error.insertAfter(element);
+    },
+    rules: {
+        phone: {
+            digits: true,
+        },
+    },
+    messages: {
+        phone: {
+            digits: "Phone should be a numeric value"
+        },
+    },
+    submitHandler: function (form) {
+        validateFileInput();
+        if (isFileValid) {
+            form.submit();
+        }
+    }
+});
+</script>
 @endsection

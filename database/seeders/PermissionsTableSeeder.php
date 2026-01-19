@@ -22,6 +22,10 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'roles-list','guard_name' => 'web'],
             ['name' => 'create-role','guard_name' => 'web'],
             ['name' => 'edit-role','guard_name' => 'web'],
+            ['name' => 'admin-settings','guard_name' => 'web'],
+            ['name' => 'admin-availability','guard_name' => 'web'],
+            ['name' => 'admin-hours-breaks','guard_name' => 'web'],
+            ['name' => 'admin-days-breaks','guard_name' => 'web'],
             ['name' => 'staff-list','guard_name' => 'web'],
             ['name' => 'create-staff','guard_name' => 'web'],
             ['name' => 'edit-staff','guard_name' => 'web'],
@@ -49,6 +53,9 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'delete-requirement','guard_name' => 'web'],
             ['name' => 'sellers-properties','guard_name' => 'web'],
             ['name' => 'reject-property','guard_name' => 'web'],
+            ['name' => 'view-bookings','guard_name' => 'web'],
+            ['name' => 'booking-payment-detail','guard_name' => 'web'],
+            ['name' => 'reschedule-appointment','guard_name' => 'web'],
         ];
 
         Permission::insert($permissions);

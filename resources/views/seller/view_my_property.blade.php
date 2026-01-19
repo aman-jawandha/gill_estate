@@ -69,7 +69,7 @@
                             <h6>Furnishing - {{ $property->furnishing }}</h6>
                             <h6>Built In Year - {{ $property->built_year }}</h6>
                             <h6>Added By - {{ $property->user->name }}</h6>
-                            <h6>Published At - {{ ($property->published_at) ? date('d-m-Y | h:i a', strtotime($property->published_at)) : 'N\A' }}</h6>
+                            <h6>Published At - {{ ($property->published_at) ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}</h6>
                         </div>
                     </div>
                     <div class="col-md-6">

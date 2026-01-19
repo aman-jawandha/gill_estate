@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-md-2 text-center">
                         <p style="margin-bottom: 0px">Published At<br><i class="fa fa-calendar"></i>
-                            {{ ($property->published_at) ? date('d-m-Y | h:i a', strtotime($property->published_at)) : 'N\A' }}</p>
+                            {{ ($property->published_at) ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}</p>
                     </div>
                 </div>
             </div>
