@@ -10,6 +10,15 @@
         li.nav-item.active {
             background-color: #947054;
         }
+        table.dataTable th,
+        table.dataTable td {
+            white-space: nowrap;
+        }
+
+        table.dataTable {
+            table-layout: auto !important;
+            width: 100% !important;
+        }
     </style>
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/admin/bootstrap.min.css') }}" />
@@ -70,6 +79,15 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('admin-availability')
+                            <li
+                                class="nav-item {{ request()->routeIs('availability', 'days-breaks', 'hours-breaks') ? 'active' : '' }}">
+                                <a href="{{ route('availability') }}">
+                                    <i class="fa fa-clock-o"></i>
+                                    <p>Availabiltiy</p>
+                                </a>
+                            </li>
+                        @endcan
                         @can('staff-list')
                             <li
                                 class="nav-item {{ request()->routeIs('staff', 'create-staff', 'edit-staff') ? 'active' : '' }}">
@@ -106,7 +124,7 @@
                         @endcan
                         @can('sellers-properties')
                             <li
-                                class="nav-item {{ request()->routeIs('sellers-properties','view-seller-property','edit-seller-property') ? 'active' : '' }}">
+                                class="nav-item {{ request()->routeIs('sellers-properties', 'view-seller-property', 'edit-seller-property') ? 'active' : '' }}">
                                 <a href="{{ route('sellers-properties') }}">
                                     <i class="fa fa-building"></i>
                                     <p>Sellers Properties</p>
@@ -114,16 +132,24 @@
                             </li>
                         @endcan
                         @can('buyers-requirements-list')
-                            <li
-                                class="nav-item {{ request()->routeIs('buyers-requirements') ? 'active' : '' }}">
+                            <li class="nav-item {{ request()->routeIs('buyers-requirements') ? 'active' : '' }}">
                                 <a href="{{ route('buyers-requirements') }}">
                                     <i class="fa fa-list-alt"></i>
                                     <p>Buyers Requirements</p>
                                 </a>
                             </li>
                         @endcan
+                        @can('view-bookings')
+                            <li class="nav-item {{ request()->routeIs('my-bookings','reschedule-appointment') ? 'active' : '' }}">
+                                <a href="{{ route('my-bookings') }}">
+                                    <i class="fa fa-list"></i>
+                                    <p>Appointments</p>
+                                </a>
+                            </li>
+                        @endcan
                         @can('faqs-list')
-                            <li class="nav-item {{ request()->routeIs('faqs', 'create-faq', 'edit-faq') ? 'active' : '' }}">
+                            <li
+                                class="nav-item {{ request()->routeIs('faqs', 'create-faq', 'edit-faq') ? 'active' : '' }}">
                                 <a href="{{ route('faqs') }}">
                                     <i class="fa fa-question-circle"></i>
                                     <p>FAQs</p>
@@ -143,6 +169,14 @@
                                 <a href="{{ route('queries') }}">
                                     <i class="fa fa-question-circle"></i>
                                     <p>Queries</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('admin-settings')
+                            <li class="nav-item {{ request()->routeIs('settings') ? 'active' : '' }}">
+                                <a href="{{ route('settings') }}">
+                                    <i class="fa fa-cog"></i>
+                                    <p>Settings</p>
                                 </a>
                             </li>
                         @endcan
@@ -339,17 +373,18 @@
             $('#state').empty().append('<option>Loading...</option>');
             if (country_id) {
                 $.ajax({
-                    url: "{{route('get-states')}}",
+                    url: "{{ route('get-states') }}",
                     method: 'GET',
-                    data:{
-                        country_id:country_id,
+                    data: {
+                        country_id: country_id,
                     },
                     success: function(response) {
                         $('#state').empty().append(
                             '<option value="" selected disabled>Select State</option>');
                         $.each(response.data, function(i, state) {
                             $('#state').append(
-                                `<option value="${state.name}" data-id="${state.id}">${state.name}</option>`);
+                                `<option value="${state.name}" data-id="${state.id}">${state.name}</option>`
+                                );
                         });
                     },
                     error: function() {
@@ -367,10 +402,10 @@
             $('#city').empty().append('<option>Loading...</option>');
             if (state_id) {
                 $.ajax({
-                    url: "{{route('get-cities')}}",
+                    url: "{{ route('get-cities') }}",
                     method: 'GET',
-                    data:{
-                        state_id:state_id,
+                    data: {
+                        state_id: state_id,
                     },
                     success: function(response) {
                         $('#city').empty().append(

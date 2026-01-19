@@ -15,6 +15,14 @@
         </div>
         <div class="container">
             @include('website_layout.common')
+            <div class="">
+                @if(auth()->user()->role == 'user' || auth()->user()->role == 'buyer')
+                <a href="{{route('change-role','seller')}}" class="btn south-btn">Login As Seller</a>
+                @endif
+                @if(auth()->user()->role == 'user' || auth()->user()->role == 'seller')
+                <a href="{{route('change-role','buyer')}}" class="btn south-btn">Login As Buyer</a>
+                @endif
+            </div>
             <div class="card p-5">
                 <form action="{{ route('profile-update') }}" id="profile_update_form" method="post"
                     enctype="multipart/form-data">

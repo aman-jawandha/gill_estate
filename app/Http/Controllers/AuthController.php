@@ -42,7 +42,10 @@ class AuthController extends Controller
         }
 
         $login = Auth::login($exists);
-
+        if ($request->has('timezone')) {
+            $exists->timezone = $request->timezone;
+            $exists->save();
+        }
     if (Auth::user()->id) {
         return redirect()->route('dashboard');
     }

@@ -118,7 +118,7 @@
                     <h6>Bedrooms - {{$property->bed_rooms}} | Bathrooms - {{$property->bath_rooms}}</h6>
                     <h6>Area - {{$property->area}} sq ft</h6>
                     <h6>Property Type - {{$property->type}}</h6>
-                    <h6>Published At - {{ ($property->published_at) ? date('d-m-Y | h:i a', strtotime($property->published_at)) : 'N\A' }}</h6>
+                    <h6>Published At - {{ ($property->published_at) ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}</h6>
                     <div class="btn-group mt-3">
                         @can('view-property')
                         <a href="{{route('view-property',$property->id)}}" class="btn btn-success btn-sm m-1"><i class="fa fa-eye"></i></a>

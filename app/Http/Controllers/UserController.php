@@ -13,7 +13,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function staff(){
-        $users = User::where('role','!=','admin')->where('role','!=','buyer')->where('role','!=','seller')->get();
+        $users = User::where('role','!=','admin')->where('role','!=','buyer')->where('role','!=','seller')->where('role','!=','user')->get();
         return view('admin.users.staff',compact('users'));
     }
 
