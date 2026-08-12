@@ -114,7 +114,7 @@
                         <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                             <div class="property-thumb">
                                 <img src="{{ asset('uploads/properties/banner_images/' . $property->banner_image) }}"
-                                    alt="Image">
+                                    alt="Image" width="100%">
                                 <div class="tag">
                                     <span>{{ $property->status }}</span>
                                 </div>
@@ -134,9 +134,14 @@
                                     <p class="location"><i class="fa fa-map-marker"></i> {{ $property->street }},
                                         {{ $property->city }}, {{ $property->state }}, {{ $property->zip_code }}</p>
                                     <p style="margin-bottom: 0px">Property Type - {{ $property->type }}</p>
-                                    <p style="margin-bottom: 0px"><i class="fa fa-bed"></i> {{ $property->bed_rooms }} |
-                                        <i class="fa fa-shower"></i> {{ $property->bath_rooms }} | {{ $property->area }}
-                                        sq ft</p>
+                                    <p style="margin-bottom: 0px">
+                                        @if($property->bed_rooms)
+                                        <i class="fa fa-bed"></i> {{ $property->bed_rooms }} |
+                                        @endif
+                                        @if($property->bath_rooms)
+                                        <i class="fa fa-shower"></i> {{ $property->bath_rooms }} |
+                                        @endif 
+                                        {{ $property->area }} sq ft</p>
                                 </div>
                             </a>
                         </div>

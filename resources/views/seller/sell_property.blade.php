@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Furnished</label>
-                                    <select id="furnishing" name="furnishing" required class="form-control">
+                                    <select id="furnishing" name="furnishing" class="form-control">
                                         <option value="" selected disabled>Select An Option</option>
                                         <option value="Fully Furnished">Fully Furnished</option>
                                         <option value="Semi Furnished">Semi Furnished</option>
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">No. Of Bed Rooms</label>
-                                    <select id="bed_rooms" name="bed_rooms" required class="form-control">
+                                    <select id="bed_rooms" name="bed_rooms" class="form-control">
                                         <option value="" selected disabled>Select A Number</option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">No. Of Bath Rooms</label>
-                                    <select id="bath_rooms" name="bath_rooms" required class="form-control">
+                                    <select id="bath_rooms" name="bath_rooms" class="form-control">
                                         <option value="" selected disabled>Select A Number</option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Built In Year</label>
-                                    <select name="built_year" class="form-control" id="built_year" required>
+                                    <select name="built_year" class="form-control" id="built_year">
                                         <option value="" selected disabled>Select Year</option>
                                         @for ($i = date('Y'); $i >= 1800; $i--)
                                             <option value="{{ $i }}">{{ $i }}</option>
@@ -156,12 +156,12 @@
                                 <div class="col-md-4">
                                     <label class="form-label">Floor No.</label>
                                     <input type="number" class="form-control" name="floor_number" id="floor_number"
-                                        required min="0" max="200">
+                                     min="0" max="200">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Total Floors</label>
                                     <input type="number" class="form-control" name="total_floors" id="total_floors"
-                                        required min="0" max="200">
+                                     min="0" max="200">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Latitude</label>

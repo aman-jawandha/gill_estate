@@ -45,7 +45,7 @@
                     </div>
                     <h6>{{$property->title}}</h6>
                     <p style="color: #947054;margin-bottom:0px"><b><i class="fa fa-map-marker"></i> {{$property->street}}, {{$property->city}}, {{$property->state}}, {{$property->zip_code}}</b></p>
-                    <p style="margin-bottom:0px">Bedrooms - {{$property->bed_rooms}} | Bathrooms - {{$property->bath_rooms}}</p>
+                    <p style="margin-bottom:0px">Bedrooms - {{$property->bed_rooms ?? 'N\A'}} | Bathrooms - {{$property->bath_rooms ?? 'N\A'}}</p>
                     <p style="margin-bottom:0px">Area - {{$property->area}} sq ft</p>
                     <p style="margin-bottom:0px">Property Type - {{$property->type}}</p>
                     <p style="margin-bottom:0px">Published At - {{ ($property->published_at) ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}</p>
