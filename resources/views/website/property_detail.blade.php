@@ -111,13 +111,13 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-1 text-center">
-                        <p style="margin-bottom: 0px">Bedroom<br><i class="fa fa-bed"></i> {{ $property->bed_rooms }}</p>
+                        <p style="margin-bottom: 0px">Bedroom<br><i class="fa fa-bed"></i> {{ $property->bed_rooms ?? 'N\A'}}</p>
                     </div>
                     <div class="col-md-2 text-center">
                         <p style="margin-bottom: 0px">Property Type<br><b>{{ $property->type }}</b></p>
                     </div>
                     <div class="col-md-1 text-center">
-                        <p style="margin-bottom: 0px">Bathroom<br><i class="fa fa-shower"></i> {{ $property->bath_rooms }}
+                        <p style="margin-bottom: 0px">Bathroom<br><i class="fa fa-shower"></i> {{ $property->bath_rooms ?? 'N\A'}}
                         </p>
                     </div>
                     <div class="col-md-1 text-center">
@@ -129,7 +129,7 @@
                     </div>
                     <div class="col-md-1 text-center">
                         <p style="margin-bottom: 0px">Built In<br><i class="fa fa-calendar"></i>
-                            {{ $property->built_year }}
+                            {{ $property->built_year ?? 'N\A'}}
                         </p>
                     </div>
                     <div class="col-md-2 text-center">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-md-2 text-center">
                         <p style="margin-bottom: 0px">Published At<br><i class="fa fa-calendar"></i>
-                            {{ ($property->published_at) ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}</p>
+                            {{ $property->published_at ? convertToUserDateTime($property->published_at, optional(auth()->user())->timezone ?? 'UTC') : 'N/A' }}
                     </div>
                 </div>
             </div>

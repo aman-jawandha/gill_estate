@@ -62,13 +62,13 @@
                     <h4>{{ $property->title }}</h4>
                     <h6 style="color: #947054"><b><i class="fa fa-map-marker"></i> {{ $property->street }},
                             {{ $property->city }}, {{ $property->state }}, {{ $property->zip_code }}</b></h6>
-                    <h6>Bedrooms - {{ $property->bed_rooms }} | Bathrooms - {{ $property->bath_rooms }}</h6>
+                    <h6>Bedrooms - {{ $property->bed_rooms ?? 'N\A'}} | Bathrooms - {{ $property->bath_rooms ?? 'N\A'}}</h6>
                     <h6>Floor No. - {{ $property->floor_number ?? 'N\A' }} | Total Floors -
                         {{ $property->total_floors ?? 'N\A' }}</h6>
                     <h6>Area - {{ $property->area }} sq ft</h6>
                     <h6>Property Type - {{ $property->type }}</h6>
-                    <h6>Furnishing - {{ $property->furnishing }}</h6>
-                    <h6>Built In Year - {{ $property->built_year }}</h6>
+                    <h6>Furnishing - {{ $property->furnishing ?? 'N\A'}}</h6>
+                    <h6>Built In Year - {{ $property->built_year ?? 'N\A'}}</h6>
                     <h6>Added By - {{ $property->user->name }}</h6>
                     <h6>Published At -
                         {{ $property->published_at ? convertToUserDateTime($property->published_at, auth()->user()->timezone) : 'N\A' }}
